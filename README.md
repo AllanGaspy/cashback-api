@@ -4,6 +4,16 @@ API desenvolvida em Python com Flask para cálculo de cashback, integração com
 
 ---
 
+## 🔗 Frontend
+
+Esta API é consumida por uma aplicação frontend desenvolvida em HTML, JavaScript e Tailwind CSS.
+
+(adicionar link do deploy do frontend)
+
+Repositório do frontend: https://github.com/AllanGaspy/cashback-frontend
+
+---
+
 ## Tecnologias utilizadas
 
 - Python 3
@@ -58,7 +68,7 @@ Responsável por calcular o cashback e retornar o histórico do usuário.
 ### Exemplo de uso (curl)
 
 ```bash
-curl -X POST https://SEU-APP.onrender.com/calcular \
+curl -X POST https://cashback-api-lrou.onrender.com \
 -H "Content-Type: application/json" \
 -d '{"valor":600,"cupom":20,"tipo_cliente":"VIP"}'
 ```

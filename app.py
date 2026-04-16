@@ -6,10 +6,14 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Reaproveitando a lógica do meu outro código que enviarei junto
+# Lógica de cálculo
 def calcular_cashback(valor, cupom, cliente_vip):
     desconto = valor * (cupom / 100)
     valor_final = valor - desconto
+
+    # Segurança extra (nunca negativo)
+    if valor_final < 0:
+        valor_final = 0
 
     CASHBACK_BASE_PERCENTUAL = 0.05
     cashback_base = valor_final * CASHBACK_BASE_PERCENTUAL
@@ -33,9 +37,25 @@ def home():
 def calcular():
     data = request.json
 
-    valor = float(data["valor"])
-    cupom = float(data.get("cupom", 0))
-    tipo = data["tipo_cliente"].upper()
+    valor = data.get("valor")
+    cupom = data.get("cupom", 0)
+    tipo = data.get("tipo_cliente", "").upper()
+
+    # Validação do valor
+    try:
+        valor = float(valor)
+        if valor <= 0:
+            raise ValueError
+    except:
+        return jsonify({"erro": "Valor deve ser um número maior que 0"}), 400
+
+    # Validação do cupom
+    try:
+        cupom = float(cupom)
+        if cupom < 0 or cupom > 100:
+            raise ValueError
+    except:
+        return jsonify({"erro": "Cupom deve estar entre 0 e 100"}), 400
 
     # Validação do tipo de cliente
     if tipo not in ["VIP", "REGULAR"]:
@@ -47,7 +67,7 @@ def calcular():
 
     ip = request.remote_addr
 
-    # Conexão com o supabase
+    # Conexão com o banco
     conn = psycopg2.connect(os.getenv("DATABASE_URL"))
     cur = conn.cursor()
 
@@ -72,7 +92,6 @@ def calcular():
         "cashback": cashback,
         "historico": historico
     })
-
 
 # Rodar servidor
 if __name__ == "__main__":
