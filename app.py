@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import psycopg2
 import os
 
 app = Flask(__name__)
+CORS(app)
 
 # Reaproveitando a lógica do meu outro código que enviarei junto
 def calcular_cashback(valor, cupom, cliente_vip):
