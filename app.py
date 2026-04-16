@@ -68,6 +68,9 @@ def calcular():
     # Pegar ip correto 
     ip = request.headers.get('X-Forwarded-For', request.remote_addr)
 
+    if ip:
+        ip = ip.split(',')[0].strip()
+
     # Conexão com o banco
     conn = psycopg2.connect(os.getenv("DATABASE_URL"))
     cur = conn.cursor()
