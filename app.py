@@ -65,7 +65,8 @@ def calcular():
 
     cashback = calcular_cashback(valor, cupom, cliente_vip)
 
-    ip = request.remote_addr
+    # Pegar ip correto 
+    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
 
     # Conexão com o banco
     conn = psycopg2.connect(os.getenv("DATABASE_URL"))

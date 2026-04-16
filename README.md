@@ -8,7 +8,7 @@ API desenvolvida em Python com Flask para cálculo de cashback, integração com
 
 Esta API é consumida por uma aplicação frontend desenvolvida em HTML, JavaScript e Tailwind CSS.
 
-(adicionar link do deploy do frontend)
+Frontend: https://cashback-frontend-vert.vercel.app/
 
 Repositório do frontend: https://github.com/AllanGaspy/cashback-frontend
 
