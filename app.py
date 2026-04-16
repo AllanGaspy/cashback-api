@@ -21,6 +21,10 @@ def calcular_cashback(valor, cupom, cliente_vip):
 
     return round(cashback, 2)
 
+# Testar se API está funcionando
+@app.route("/")
+def home():
+    return "API OK"
 
 # Rota da API  
 @app.route("/calcular", methods=["POST"])
