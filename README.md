@@ -81,7 +81,7 @@ Tabela: `consultas`
 ## Deploy
 
 API hospedada no Render:
-https://SEU-APP.onrender.com
+https://cashback-api-lrou.onrender.com/
 
 ---
 
